@@ -14,9 +14,14 @@
           <li class="nav-item">
             <router-link class="nav-link" to="/">Početak</router-link>
           </li>
-          <li class="nav-item" v-if="!isLoggedIn">
-            <a class="nav-link" @click="googleSignIn">Prijava</a>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/apartmani">Apartmani</router-link>
           </li>
+          <div v-if="!isLoggedIn">
+            <li class="nav-item">
+              <a class="nav-link" @click="googleSignIn">Prijava</a>
+            </li>
+          </div>
           <div v-else>
             <li class="nav-item">
               <router-link class="nav-link" to="/profil">Profil</router-link>
@@ -35,59 +40,71 @@
 </template>
 
 <script>
-import firebase from '../../firebase.js';
+// import firebase from '../../firebase.js';
+// import { mapActions } from 'vuex'
+// import { mapState } from 'vuex'
 
 export default {
-  data() {
-    return {
-      user: {},
-      isLoggedIn: false
-    }
-  },
   methods: {
     googleSignIn() {
-      let provider = new firebase.auth.GoogleAuthProvider();
-      firebase.auth()
-        .signInWithPopup(provider)
-        .then((result) => {
-          var credential = result.credential;
-
-          // This gives you a Google Access Token. You can use it to access the Google API.
-          var token = credential.accessToken;
-          console.log(token)
-          // The signed-in user info.
-          var user = result.user;
-          console.log(user)
-          this.isLoggedIn = true;
-        }).catch((error) => {
-          // Handle Errors here.
-          console.log(error)
-        });
-      firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-          // Korisnik je ulogiran
-          const setUser = {
-            id: user.uid,
-            name: user.displayName,
-            email: user.email,
-            image: user.photoURL,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-          };
-          // Zapisivanje ulogiranog korisnika u bazu podataka
-          // users je ime kolekcije, dok je svaki zapis u toj kolekciji specifican id od svakog usera
-          firebase.firestore().collection('users').doc(setUser.id).set(setUser);
-          this.user = setUser;
-        } else {
-          // Korisnik nije ulogiran
-        }
-      });
+      this.$store.dispatch('korisnik/login')
     },
     googleSignOut() {
-      firebase.auth()
-        .signOut()
-        .then(() => {
-          this.isLoggedIn = false;
-        });
+      this.$store.dispatch('korisnik/logout')
+    }
+    // googleSignIn() {
+    //   let provider = new firebase.auth.GoogleAuthProvider();
+    //   firebase.auth()
+    //     .signInWithPopup(provider)
+    //     .then((result) => {
+    //       var credential = result.credential;
+
+    //       // This gives you a Google Access Token. You can use it to access the Google API.
+    //       var token = credential.accessToken;
+    //       console.log(token)
+    //       // The signed-in user info.
+    //       var user = result.user;
+    //       console.log(user)
+    //       this.isLoggedIn = true;
+    //     }).catch((error) => {
+    //       // Handle Errors here.
+    //       console.log(error)
+    //     });
+    //   firebase.auth().onAuthStateChanged(user => {
+    //     if (user) {
+    //       // Korisnik je ulogiran
+    //       const setUser = {
+    //         id: user.uid,
+    //         name: user.displayName,
+    //         email: user.email,
+    //         image: user.photoURL,
+    //         createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    //       };
+    //       // Zapisivanje ulogiranog korisnika u bazu podataka
+    //       // users je ime kolekcije, dok je svaki zapis u toj kolekciji specifican id od svakog usera
+    //       firebase.firestore().collection('users').doc(setUser.id).set(setUser);
+    //       this.user = setUser;
+    //     } else {
+    //       // Korisnik nije ulogiran
+    //     }
+    //   });
+    // },
+    // googleSignOut() {
+    //   firebase.auth()
+    //     .signOut()
+    //     .then(() => {
+    //       this.isLoggedIn = false;
+    //     });
+    // }
+    
+  },
+  computed: {
+    // korisnik: mapState('korisnik', ['user', 'isLoggedIn'])
+    isLoggedIn() {
+      return this.$store.state.korisnik.isLoggedIn;
+    },
+    user() {
+      return this.$store.state.korisnik.user;
     }
   }
 }
