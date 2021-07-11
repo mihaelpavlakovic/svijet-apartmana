@@ -1,16 +1,21 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <router-link class="navbar-brand" to="/">Svijet Apartmana</router-link>
+      <router-link class="navbar-brand" to="/">
+        <div class="navbar-logo">
+          <img src="../../assets/logo-case.png" alt="Logo od Svijeta Apartmana">
+          <p>Svijet Apartmana</p>
+        </div>
+      </router-link>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <div class="d-flex align-items-center" v-if="isLoggedIn">
+        <div class="d-flex align-items-center user" v-if="isLoggedIn">
           <p>{{ user.name }}</p>
           <img id="profile-image" referrerpolicy="no-referrer" :src="user.image" alt="User image">
         </div>
         <span class="navbar-toggler-icon" v-else></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-center">
           <li class="nav-item">
             <router-link class="nav-link" to="/">Početak</router-link>
           </li>
@@ -22,7 +27,7 @@
               <a class="nav-link" @click="googleSignIn">Prijava</a>
             </li>
           </div>
-          <div v-else>
+          <div v-else class="d-flex mobile-nav">
             <li class="nav-item">
               <router-link class="nav-link" to="/profil">Profil</router-link>
             </li>
@@ -125,5 +130,34 @@ button {
   height: 50px;
   width: auto;
   border-radius: 10px;
+}
+.container-fluid {
+  padding: 0 60px;
+}
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+.navbar-logo img {
+  height: 50px;
+  width: 50px;
+}
+.navbar-logo p {
+  margin-left: 10px;
+}
+
+@media only screen and (max-width: 966px) {
+  .container-fluid {
+    padding: 0 10px;
+  }
+  .mobile-nav {
+    flex-direction: column;
+  }
+  .user p {
+    display: none;
+  }
+  .nav-items {
+    
+  }
 }
 </style>

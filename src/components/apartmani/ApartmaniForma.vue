@@ -1,51 +1,55 @@
 <template>
-  <form @submit.prevent="submit">
-    <div class="form-control">
-      <label for="nazivObjekta">Naziv Objekta:</label>
-      <input type="text" id="nazivObjekta" v-model.trim="nazivObjekta">
-    </div>
-    <div class="form-control">
-      <label for="tipObjekta">Tip objekta:</label>
-      <select name="tipObjekta" id="tipObjekta" v-model.trim="tipObjekta">
-        <option value="apartman">Apartman</option>
-        <option value="kuca">Kuća</option>
-        <option value="soba">Soba</option>
-      </select>
-    </div>
-    <div class="form-control">
-      <label for="ulica">Ulica:</label>
-      <input type="text" id="ulica" v-model.trim="ulica">
-    </div>
-    <div class="form-control">
-      <label for="grad">Grad:</label>
-      <input type="text" id="grad" v-model.trim="grad">
-    </div>
-    <div class="form-control">
-      <label for="postanskiBroj">Postanski broj:</label>
-      <input type="number" id="postanskiBroj" v-model.number="postanskiBroj">
-    </div>
-    <div class="form-control">
-      <label for="povrsinaApartmana">Povrsina apartmana u m2:</label>
-      <input type="number" id="povrsinaApartmana" v-model.number="povrsinaApartmana">
-    </div>
-    <div class="form-control">
-      <label for="brojOsoba">Maksimalni broj osoba:</label>
-      <input type="number" id="brojOsoba" v-model.number="brojOsoba">
-    </div>
-    <div class="form-control">
-      <label for="brojLezaja">Broj lezaja:</label>
-      <input type="text" id="brojLezaja" v-model.number="brojLezaja">
-    </div>
-    <div class="form-control">
-      <label for="cijenaNocenja">Cijena noćenja:</label>
-      <input type="number" id="cijenaNocenja" v-model.number="cijenaNocenja">
-    </div>
-    <div class="form-control">
-      <label for="opis">Opis:</label>
-      <textarea row="4" id="opis" v-model.trim="opis"></textarea>
-    </div>
-    <button>Objavi</button>
-  </form>
+  <section id="forma">
+    <form @submit.prevent="submit">
+      <div class="form-control">
+        <label for="nazivObjekta">Naziv Objekta:</label>
+        <input type="text" id="nazivObjekta" v-model.trim="nazivObjekta">
+      </div>
+      <div class="form-control">
+        <label for="tipObjekta">Tip objekta:</label>
+        <select name="tipObjekta" id="tipObjekta" v-model.trim="tipObjekta">
+          <option value="apartman">Apartman</option>
+          <option value="kuca">Kuća</option>
+          <option value="soba">Soba</option>
+        </select>
+      </div>
+      <div class="form-control">
+        <label for="ulica">Ulica:</label>
+        <input type="text" id="ulica" v-model.trim="ulica">
+      </div>
+      <div class="form-control">
+        <label for="grad">Grad:</label>
+        <input type="text" id="grad" v-model.trim="grad">
+      </div>
+      <div class="form-control">
+        <label for="postanskiBroj">Postanski broj:</label>
+        <input type="number" id="postanskiBroj" v-model.number="postanskiBroj">
+      </div>
+      <div class="form-control">
+        <label for="povrsinaApartmana">Povrsina apartmana u m2:</label>
+        <input type="number" id="povrsinaApartmana" v-model.number="povrsinaApartmana">
+      </div>
+      <div class="form-control">
+        <label for="brojOsoba">Maksimalni broj osoba:</label>
+        <input type="number" id="brojOsoba" v-model.number="brojOsoba">
+      </div>
+      <div class="form-control">
+        <label for="brojLezaja">Broj lezaja:</label>
+        <input type="text" id="brojLezaja" v-model.number="brojLezaja">
+      </div>
+      <div class="form-control">
+        <label for="cijenaNocenja">Cijena noćenja:</label>
+        <input type="number" id="cijenaNocenja" v-model.number="cijenaNocenja">
+      </div>
+      <div class="form-control">
+        <label for="opis">Opis:</label>
+        <textarea row="4" id="opis" v-model.trim="opis"></textarea>
+      </div>
+      <div class="button">
+        <button type="button" class="btn btn-primary">Objavi</button>
+      </div>
+    </form>
+  </section>
 </template>
 
 <script>
@@ -135,5 +139,29 @@ h3 {
 .invalid input,
 .invalid textarea {
   border: 1px solid red;
+}
+#forma {
+  margin-bottom: 30px;
+}
+#forma form .form-control {
+  border: none;
+}
+#forma form .form-control label {
+  margin: 0 0 15px 20px;
+}
+#forma form .form-control input, #forma form .form-control select {
+  height: 40px;
+  border-radius: 10px;
+  padding: 0 20px;
+}
+#forma form .form-control textarea {
+  height: 100px;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+.button button {
+  display: flex;
+  align-items: center;
+  margin: 20px auto;
 }
 </style>

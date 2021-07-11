@@ -10,14 +10,14 @@ const store = createStore({
   },
   state() {
     return {
-      // apartmanId: '',
+      apartmanId: '',
       userId: ''
     }
   },
   getters: {
-    // apartmanId(state) {
-    //   return state.apartmanId;
-    // },
+    apartmanId(state) {
+      return state.apartmanId;
+    },
     userId(state) {
       return state.userId; 
     }
